@@ -13,11 +13,13 @@
 
 ## Tools
 
-**Hardware**:
-<br/>[FW4C – 4 Port Intel® J3710](https://protectli.com/product/fw4c/)
-- Memory: 8GB
-- Storage: 120GB SSD
-- BIOS: [coreboot](https://github.com/coreboot/coreboot)<br/>
+**Hardware**:  
+- [FW4C – 4 Port Intel® J3710](https://protectli.com/product/fw4c/)  
+  - Memory: 8GB  
+  - Storage: 120GB SSD  
+  - BIOS: [coreboot](https://github.com/coreboot/coreboot)
 
-**Software**:
-<br/>[pfSense](https://www.pfsense.org/)<br/>
+**Software**:  
+- [pfSense](https://www.pfsense.org/)
+
+## Instructions
