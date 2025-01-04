@@ -5,8 +5,19 @@
 
 ## Description
 
-**pfSense Segmentation** is how I configured 3 separate lans networks.This would segment the network to separate trusted devices, service devices like server, and iot devices.
+**pfSense Segmentation** is how I configured 3 separate lans networks.This would segment the network by trusted devices, service devices like server, and iot devices.
 
 ## Project Scope
 
-- **Objective**: To have iot devices, trusted devices, and server separated from each other on their own lan network and firewall rules to control which devices are able to communicate with each other on he network.
+**Objective**: To have iot devices, trusted devices, and server separated from each other on their own lan network and firewall rules to control which devices are able to communicate with each other on he network.
+
+## Tools
+
+**Hardware**:
+<br/>[FW4C – 4 Port Intel® J3710](https://protectli.com/product/fw4c/)
+- Memory: 8GB
+- Storage: 120GB SSD
+- BIOS: [coreboot](https://github.com/coreboot/coreboot)<br/>
+
+**Software**:
+<br/>[pfSense](https://www.pfsense.org/)<br/>
