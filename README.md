@@ -9,7 +9,7 @@
 
 ## Project Scope
 
-**Objective**: To have iot devices, trusted devices, and server separated from each other on their own lan network and firewall rules to control which devices are able to communicate with each other on he network.
+**Objective**: To have iot devices, trusted devices, and server separated from each other on their own lan network and firewall rules to control which devices are able to communicate with each other on the network.
 
 ## Tools
 
