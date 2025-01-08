@@ -27,6 +27,8 @@
 
 ## Instructions
 
+**Prepare Installation Media**  
+
 To configure a bootable pfSense usb flash drive you will need to have either balenaEtcher or Rufus to flash a copy of phSense to the flash drive. Linked is the instruction to download pfSense's installation image [AMD64 Memstick USB](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html). Next use a OS Image Flasher like blenaEtcher to flash the file to the flash drive. This demonstration is using balenaEtcher.
 
 1. Insert a USB flash drive into the client computer
@@ -40,3 +42,27 @@ To configure a bootable pfSense usb flash drive you will need to have either bal
 9. Remove the USB flash drive from the client system
 
 Then take the flash drive with pfSense and plug it into the [FW4C – 4 Port Intel® J3710](https://protectli.com/product/fw4c/).
+
+**Booting the Install Media**  
+
+Insert the flash drive and then power on the target system. In this demonstration we are using [FW4C – 4 Port Intel® J3710](https://protectli.com/product/fw4c/). Then turn the Protectli Vault on. It should bootup into pfsense installation but if it does not follow these steps.
+
+1. Make sure that the Protectli Vault is powered off
+2. Power back on the device and while it booting up press **F11** on your keyboard.
+3. Choose **Boot From USB**
+
+**Installing pfSense**
+
+Now that we are booted into the pfSense installer drive. We can start installing pfSense on to the Protectli Vault hardware.When the installer starts the first screen it presents offers license terms for pfSense® software which must accept before installation. Read the terms carefully. Use the Page Down and Page Up keys to display additional license text. Press **Enter** to Accept the terms and proceed.
+
+1. Press **Enter** on **Install pfSense**<br /><img src="https://github.com/4LifeStrategy/pfSense-Segmentation/blob/9683b8f96804708b9235488601e255a8e72f5142/pfsense_installer_start.png" width="500">
+2. Press **Enter** on **Continue with default keymap**
+3. Press **ENter** on **Guided Root-on-ZFS**
+4. Press **Enter** on **Proceed with Installation**
+5. Press **Enter** on **Stripe-No Redundancy**
+6. Press **Enter** on **Protectli 120GB mSATA**<br />*It will show a different number depending on the your storage option*
+7. Press **Y** to confirm your choice one last time
+8. Once the installation is complete press **N** to confirm you don't want to make any changes.
+9. Finally press **R** to reboot the device.
+
+**Configuring pfSense**
