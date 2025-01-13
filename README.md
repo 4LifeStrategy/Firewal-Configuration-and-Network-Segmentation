@@ -53,7 +53,7 @@ Insert the flash drive and then power on the target system. In this demonstratio
 
 **Installing pfSense**
 
-Now that we are booted into the pfSense installer drive. We can start installing pfSense on to the Protectli Vault hardware.When the installer starts the first screen it presents offers license terms for pfSense® software which must accept before installation. Read the terms carefully. Use the Page Down and Page Up keys to display additional license text. Press **Enter** to Accept the terms and proceed.
+Now that we are booted into the pfSense installer drive. We can start installing pfSense on to the Protectli Vault hardware. When the installer starts the first screen it presents offers license terms for pfSense® software which must accept before installation. Read the terms carefully. Use the Page Down and Page Up keys to display additional license text. Press **Enter** to Accept the terms and proceed.
 
 1. Press **Enter** on **Install pfSense**<br /><img src="https://github.com/4LifeStrategy/pfSense-Segmentation/blob/9683b8f96804708b9235488601e255a8e72f5142/pfsense_installer_start.png" width="500">
 2. Press **Enter** on **Continue with default keymap**
@@ -67,7 +67,7 @@ Now that we are booted into the pfSense installer drive. We can start installing
 
 **Configuring pfSense**
 
-Once the device has rebooted, we can start to configure the pfSense settings. Plug an ethernet cable into the Lan Port of your Protectli Volt and plug the other end into your computer. Open a browser on your computer and go to **192.168.1.1**, it will load to the pfSense login screen.
+Once the device has rebooted, we can start to configure the pfSense settings. Plug an ethernet cable into the Lan Port of your Protectli Vault and plug the other end into your computer. Open a browser on your computer and go to **192.168.1.1**, it will load to the pfSense login screen.
 
 1. Enter the default username **admin** and the default password **pfsense**
 
