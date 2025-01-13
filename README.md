@@ -57,7 +57,7 @@ Now that we are booted into the pfSense installer drive. We can start installing
 
 1. Press **Enter** on **Install pfSense**<br /><img src="https://github.com/4LifeStrategy/pfSense-Segmentation/blob/9683b8f96804708b9235488601e255a8e72f5142/pfsense_installer_start.png" width="500">
 2. Press **Enter** on **Continue with default keymap**
-3. Press **ENter** on **Guided Root-on-ZFS**
+3. Press **Enter** on **Guided Root-on-ZFS**
 4. Press **Enter** on **Proceed with Installation**
 5. Press **Enter** on **Stripe-No Redundancy**
 6. Press **Enter** on **Protectli 120GB mSATA**<br />*It will show a different number depending on the your storage option*
@@ -66,3 +66,23 @@ Now that we are booted into the pfSense installer drive. We can start installing
 9. Finally press **R** to reboot the device.
 
 **Configuring pfSense**
+
+Once the device has rebooted, we can start to configure the pfSense settings. Plug an ethernet cable into the Lan Port of your Protectli Volt and plug the other end into your computer. Open a browser on your computer and go to **192.168.1.1**, it will load to the pfSense login screen.
+
+1. Enter the default username **admin** and the default password **pfsense**
+
+We are going to change the default url. This will add some obscurity to the network by not using defaults.
+
+1. Select **Interfaces**
+2. Select **LAN**
+3. Scroll down to **Static IPv4 Configuration** delete the IPv4 address and change it to some other arbitrary number in the 192.168 space.<br /> NOTE: For this demonstration we are using 115 for our 3rd octet. Example: **192.168.115.1**
+4. Click **Save** but don't click **Apply changes** yet.<br />NOTE: We need to configure the dns server or else pfSense will not be able to automatically assign a new ip address to your computer and causing you to the ability to access the pfSense settings again.
+5. Select **Services**
+6. Select **DHCP Server**
+7. Scroll down to **Range** and change From: **192.168.115.100** and To: **192.168.115.254**<br />NOTE: This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.
+8. Click **Save**
+9. Select **Interfaces**
+10. Select **LAN**
+11. Click **Apply changes**
+
+The web page may seems not responsive but its because we confirmed the changes and changed the defaults. On the address bar of your browser type the ip address that you configured. For this demonstration we used **192.168.115.1**.
