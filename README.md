@@ -76,10 +76,10 @@ We are going to change the default url. This will add some obscurity to the netw
 1. Select **Interfaces**
 2. Select **LAN**
 3. Scroll down to **Static IPv4 Configuration** delete the IPv4 address and change it to some other arbitrary number in the 192.168 space.<br /> NOTE: For this demonstration we are using 115 for our 3rd octet. Example: **192.168.115.1**
-4. Click **Save** but don't click **Apply changes** yet.<br />NOTE: We need to configure the dns server or else pfSense will not be able to automatically assign a new ip address to your computer and causing you to the ability to access the pfSense settings again.
+4. Click **Save** but don't click **Apply changes** yet.<br />*We need to configure the dns server or else pfSense will not be able to automatically assign a new ip address to your computer and causing you to the ability to access the pfSense settings again.*
 5. Select **Services**
 6. Select **DHCP Server**
-7. Scroll down to **Range** and change From: **192.168.115.100** and To: **192.168.115.254**<br />NOTE: This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.
+7. Scroll down to **Range** and change From: **192.168.115.100** and To: **192.168.115.254**<br />*This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.*
 8. Click **Save**
 9. Select **Interfaces**
 10. Select **LAN**
