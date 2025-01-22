@@ -1,11 +1,11 @@
 <div align="center" style="white-space: nowrap;">
   <img src="https://github.com/4LifeStrategy/4LifeStrategy/blob/88ffe3009f1399de4502d4d5641c8f7a0fd56852/4LifeStrategy%20Logo%20Center.png" alt="4LifeStrategy Logo" width="100" style="display:inline-block; vertical-align:middle; margin-right:10px;">
-  <h1 style="margin:0; vertical-align:middle;">pfSense Segmentation</h1>
+  <h1 style="margin:0; vertical-align:middle;">Firewall Configuration & Network Segmentation</h1>
 </div>
 
 ## Description
 
-**pfSense Segmentation** is how I configured 3 separate lans networks.This would segment the network by trusted devices, service devices like server, and iot devices.
+**Firewall Configuration & Network Segmentation** is how I configured 3 separate lans networks.This would segment the network by trusted devices, service devices like server, and iot devices.
 
 ## Project Scope
 
@@ -32,7 +32,7 @@
 To configure a bootable pfSense usb flash drive you will need to have either balenaEtcher or Rufus to flash a copy of phSense to the flash drive. Linked is the instruction to download pfSense's installation image [AMD64 Memstick USB](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html). Next use a OS Image Flasher like blenaEtcher to flash the file to the flash drive. This demonstration is using balenaEtcher.
 
 1. Insert a USB flash drive into the client computer
-2. Start blenaEtcher <br /><img src="https://github.com/4LifeStrategy/pfSense-Segmentation/blob/9190a58af2b224ab1b8225581017e6f04b259aa6/balenaEtcher_start.png" width="500">
+2. Start blenaEtcher <br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/162f74642fa8494f00ad1ef8d86a4ac7856b5434/balenaEtcher_start.png" width="500">
 3. Click **Flash from file**
 4. Click the flash drive to which blenaEtcher should write the image
 5. Click **Select(1)** to continue
@@ -55,7 +55,7 @@ Insert the flash drive and then power on the target system. In this demonstratio
 
 Now that we are booted into the pfSense installer drive. We can start installing pfSense on to the Protectli Vault hardware. When the installer starts the first screen it presents offers license terms for pfSense® software which must accept before installation. Read the terms carefully. Use the Page Down and Page Up keys to display additional license text. Press **Enter** to Accept the terms and proceed.
 
-1. Press **Enter** on **Install pfSense**<br /><img src="https://github.com/4LifeStrategy/pfSense-Segmentation/blob/9683b8f96804708b9235488601e255a8e72f5142/pfsense_installer_start.png" width="500">
+1. Press **Enter** on **Install pfSense**<br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/162f74642fa8494f00ad1ef8d86a4ac7856b5434/pfsense_installer_start.png" width="500">
 2. Press **Enter** on **Continue with default keymap**
 3. Press **Enter** on **Guided Root-on-ZFS**
 4. Press **Enter** on **Proceed with Installation**
@@ -76,7 +76,7 @@ We are going to change the default url. This will add some obscurity to the netw
 1. Select **Interfaces**
 2. Select **LAN**
 3. Scroll down to **Static IPv4 Configuration** delete the IPv4 address and change it to some other arbitrary number in the 192.168 space.<br />*For this demonstration we are using 115 for our 3rd octet.<br />Example: **192.168.115.1***
-4. Click **Save** but don't click **Apply changes** yet.<br />*We need to configure the dns server or else pfSense will not be able to automatically assign a new ip address to your computer and causing you to the ability to access the pfSense settings again.*
+4. Click **Save** but don't click **Apply changes** yet.<br />*We need to configure the dns server or else pfSense will not be able to automatically assign a new ip address to your computer and causing you to loss the ability to access the pfSense settings again.*
 5. Select **Services**
 6. Select **DHCP Server**
 7. Scroll down to **Range** and change From: **192.168.115.100** and To: **192.168.115.254**<br />*This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.*
