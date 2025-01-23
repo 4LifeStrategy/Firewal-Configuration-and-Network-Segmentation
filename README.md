@@ -107,3 +107,93 @@ Put the router in Bridge mode, some routers call their bridge mode, access point
 6. Then select **Bridge mode**
 7. The router will perform a restart.
 
+**Network Segmentation**
+
+By default OPT1 and OPT2 interface are disabled and we need to enable and configure them.
+
+1. Login the pfSense intense by going to **http://192.168.115.1** on your web browser.
+2. Click on **Interfaces**
+3. Click on **Assignments**
+4. Click the **Add** button twice and it will automatically assign OPT1 and OPT2 interfaces.
+5. Click **Save**
+
+Since OPT1 and OPT2 are now enabled. Next we are going to assign a static ip address to the network gateway and setting up the DHCP range for that networks. We are basically performing the same steps we performed for the LAN interface but changing the 3rd octet for each network.
+
+1. Click on **Interfaces**
+2. Click on **OPT1**
+3. Click the box **Enable Interface**
+4. Change **IPv4 Configuration Type** to **Static IPv4**
+5. Scroll down to **Static IPv4 Configuration** put some other arbitrary number in the 192.168 space.<br />*For this demonstration we are using 115 for our 3rd octet.<br />Example: **192.168.215.1***
+6. Next to the ip address field is a **/**, make sure it's set to **24**
+7. In **IPv4 Upstream gateway** set to **None**
+8. Click **Save**
+9. Click **Apply Changes**
+
+Follow the same steps for OPT2 but changing the 3rd octet. This demo we will be using **192.168.315.1** Next we are going to configure DHCP for OPT1 and OPT2.
+
+1. Select **Services**
+2. Select **DHCP Server**
+3. Click on the **OTP1** tab
+4. Check ***Enable DHCP server on OTP1 Interface**
+5. Scroll down to **Range** and change From: **192.168.215.100** and To: **192.168.215.254**<br />*This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.*
+6. In **DNS server** put **192.168.215.1**
+7. Click **Save**
+8. Click on the **OTP2** tab
+9. Check ***Enable DHCP server on OTP1 Interface**
+10. Scroll down to **Range** and change From: **192.168.315.100** and To: **192.168.315.254**<br />*This will let the DHCP server to automatically assigned ip address between 100-254. Leaving ip range 2-99 for static devices.*
+11. In **DNS server** put **192.168.315.1**
+12. Click **Save**
+
+**Domain Name Server (DNS) Configuration**
+
+We need to configure dns to be able to utilize the internet.
+
+1. Click on **Services**
+2. Click on **DNS resolver**
+3. Scroll down to **Network Interfaces** and select **All**
+4. In **Outgoing Network Interface** select **WAN** if not already selected.
+5. Click **Save**
+6. Click **Apply Changes**
+
+**Firewall Rules** 
+
+Next we are going to set up basic firewall rules to block OTP2 (which would be considered the less secure network interface due to hosting IOT devices and over devices connected via wifi) from initiating communication to other interfaces but other network are able to initiate communication. First we are going to setup firewall rules to grant access to the internet for OPT1 and OPT2.
+
+1. Go to **Firewall**
+2. Select **Rules**
+3. Click on **LAN**
+4. Click the **COPY** symbol on the firewall rule with Description **Default allow LAN to any rule**
+5. In **Interface** change it from LAN to **OPT1**
+6. Under **Source** change it from LAN Net to **OPT1** net.
+7. Change the description to state **Default allow OPT1 to any rule**
+8. Click **Save**
+9. Click **Apply Changes**
+
+Do the same for OPT2 and test each port (LAN, OPT1, and OPT2) are able to reach the internet by connecting your computer to each of the ports and utilize the web browser then go to any site. We are going to add more firewall rules. Keep in mind that firewall rules are executed in order starting from the top and makes it way down for each network packet.
+
+Rule to block connection from LAN to OPT1
+1. In the LAN tab Click on the **Add (up arrow)**
+2. For **Action** set to **Block**
+3. **Protocol** set to **Any**
+4. **Source** set to **LAN net**
+5. **Destination** set to **OPT1 Net**
+6. Check on **Log packets that are handled by this rule**
+7. Add a description describing the rule action
+8. Click **Save**
+9. Click **Apply Changes**
+
+Rule to block connection from OPT2 To OPT1
+1. In the OPT2 tab Click on the **Add (up arrow)**
+2. For **Action** set to **Block**
+3. **Protocol** set to **Any**
+4. **Source** set to **OTP2 net**
+5. **Destination** set to **OPT1 Net**
+6. Check on **Log packets that are handled by this rule**
+
+Rule to block connection from OPT2 To LAN
+1. In the OPT2 tab Click on the **Add (up arrow)**
+2. For **Action** set to **Block**
+3. **Protocol** set to **Any**
+4. **Source** set to **OTP2 net**
+5. **Destination** set to **LAN Net**
+6. Check on **Log packets that are handled by this rule**
