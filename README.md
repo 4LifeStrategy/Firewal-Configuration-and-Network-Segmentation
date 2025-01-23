@@ -20,7 +20,9 @@
   - BIOS: [coreboot](https://github.com/coreboot/coreboot)
 - USB Flash Drive
   - Capacity: 8GB
-
+- Your Internet Provider or personal modem.
+- Access Point or wifi router that can be set to bridge mode.
+- Network Switch
 **Software**:  
 - Firewall/Gateway: [pfSense](https://www.pfsense.org/)
 - OS Image Flasher: [balenaEtcher](https://etcher.balena.io/) or [Rufus](https://rufus.ie/en/)
@@ -85,4 +87,20 @@ We are going to change the default url. This will add some obscurity to the netw
 10. Select **LAN**
 11. Click **Apply changes**
 
-The web page may seem not responsive but its because we confirmed the changes and changed the defaults. On the address bar of your browser type the ip address that you configured. For this demonstration we used **192.168.115.1**.
+The web page may seem not responsive but its because we confirmed the changes and changed the defaults. Unplug your ethernet cord from your device and re-plug it back on. This will cause your device to reach out to the pfSense dhcp server for a new ip address. On the address bar of your browser type the ip address that you configured. For this demonstration we used **http://192.168.115.1**.
+
+**Connecting modem and wifi**
+
+1. Connect your **modem** to the Protectli Vault in the **WAN port**. You may have to restart your modem to working with pfSense. 
+2. Connect the **network switch** to the **OTP2 port** on your Protectli Vault.
+3. Cnnect your wifi **access point** or **wifi router** to **network switch**.<br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/23217f939f554bff64b42bbcf6f19dcf37cd2e2b/Network%20Diagram.png" width="500">
+
+Put the router in Bridge mode, some routers call their bridge mode, access point mode. This mode will bypass it's own dhcp server and rely on pfSense's dhcp server. For this demonstration we are using Google Wifi that but in bridge mode performing the following steps.
+
+1. Within the Google Home app tap on **Wifi**
+2. Tap on **Network setting**
+3. Tap on **Advanced setting**
+4. Tap on **Device mode**
+5. Tap on the **Wifi Location**
+6. Then select **Bridge mode**
+7. The router will perform a restart.
