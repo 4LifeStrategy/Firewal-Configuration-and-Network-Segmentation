@@ -23,6 +23,7 @@
 - Your Internet Provider or personal modem.
 - Access Point or wifi router that can be set to bridge mode.
 - Network Switch
+
 **Software**:  
 - Firewall/Gateway: [pfSense](https://www.pfsense.org/)
 - OS Image Flasher: [balenaEtcher](https://etcher.balena.io/) or [Rufus](https://rufus.ie/en/)
