@@ -27,9 +27,7 @@
 - Firewall/Gateway: [pfSense](https://www.pfsense.org/)
 - OS Image Flasher: [balenaEtcher](https://etcher.balena.io/) or [Rufus](https://rufus.ie/en/)
 
-## Instructions
-
-**Prepare Installation Media**  
+## Prepare Installation Media
 
 To configure a bootable pfSense usb flash drive you will need to have either balenaEtcher or Rufus to flash a copy of phSense to the flash drive. Linked is the instruction to download pfSense's installation image [AMD64 Memstick USB](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html). Next use a OS Image Flasher like blenaEtcher to flash the file to the flash drive. This demonstration is using balenaEtcher.
 
@@ -53,7 +51,7 @@ Insert the flash drive and then power on the target system. In this demonstratio
 2. Power back on the device and while it booting up press **F11** on your keyboard.
 3. Choose **Boot From USB**
 
-**Installing pfSense**
+## Installing pfSense
 
 Now that we are booted into the pfSense installer drive. We can start installing pfSense on to the Protectli Vault hardware. When the installer starts the first screen it presents offers license terms for pfSense® software which must accept before installation. Read the terms carefully. Use the Page Down and Page Up keys to display additional license text. Press **Enter** to Accept the terms and proceed.
 
@@ -67,7 +65,7 @@ Now that we are booted into the pfSense installer drive. We can start installing
 8. Once the installation is complete press **N** to confirm you don't want to make any changes.
 9. Finally press **R** to reboot the device.
 
-**Configuring pfSense**
+## Configuring pfSense
 
 Once the device has rebooted, we can start to configure the pfSense settings. Plug an ethernet cable into the Lan Port of your Protectli Vault and plug the other end into your computer. Open a browser on your computer and go to **192.168.1.1**, it will load to the pfSense login screen.
 
@@ -89,7 +87,7 @@ We are going to change the default url. This will add some obscurity to the netw
 
 The web page may seem not responsive but its because we confirmed the changes and changed the defaults. Unplug your ethernet cord from your device and re-plug it back on. This will cause your device to reach out to the pfSense dhcp server for a new ip address. On the address bar of your browser type the ip address that you configured. For this demonstration we used **http://192.168.115.1**.
 
-**Connecting modem and wifi**
+## Connecting modem and wifi
 
 1. Connect your **modem** to the Protectli Vault in the **WAN port**. You may have to restart your modem to working with pfSense. 
 2. Connect the **network switch** to the **OTP2 port** on your Protectli Vault.
@@ -107,7 +105,7 @@ Put the router in Bridge mode, some routers call their bridge mode, access point
 6. Then select **Bridge mode**
 7. The router will perform a restart.
 
-**Network Segmentation**
+## Network Segmentation
 
 By default OPT1 and OPT2 interface are disabled and we need to enable and configure them.
 
@@ -198,7 +196,7 @@ Rule to block connection from OPT2 To LAN
 5. **Destination** set to **LAN Net**
 6. Check on **Log packets that are handled by this rule**
 
-**Static IP Address & Aliasing**
+## tatic IP Address & Aliasing
 
 Assigning static ip addresses for devices on the network would allow maintaining firewalls rules that involves specific devices. Allies allows up to create groups of static ip address to be referenced by a desired naming schema. You will need to find the mac address of each device that you want to assign a static ip address. Usually found in the network settings of said device.
 
@@ -212,9 +210,113 @@ Assigning static ip addresses for devices on the network would allow maintaining
 
 Repeat the action each device you want to assign an ip address to a device. For this demonstration we have already assigned ip address to some mobile devices, laptop, nas, and tablet. Next we are going to create some aliases to refer to some of devices when creating firewall rules.
 
+Alias for Trusted_Devices
 1. Click **Firewall**
 2. Click **Aliases**
 3. Click **Add**
 4. Under **Name** put **Trusted_Devices**
 5. Under **Description** add your description
-6. Under **IP or FQDN** add the static ip of your personal devices like laptop and mobile devices and add a description for each ip address appropriately.<br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/8bba55d16df7edc5ccbc817ab4516e20f86eff22/Trusted%20Devices.png" width="500">
+6. Under **Type** select **Host(s)**
+7. Under **IP or FQDN** add the static ip of your personal devices like laptop and mobile devices and add a description for each ip address appropriately.<br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/8bba55d16df7edc5ccbc817ab4516e20f86eff22/Trusted%20Devices.png" width="500">
+8. Click **Save**
+9. Click **Apply changes**
+
+Alias for Plex Service
+Based on [Troubleshooting Remote Access](https://support.plex.tv/articles/200931138-troubleshooting-remote-access/) [current working ip address](https://s3-eu-west-1.amazonaws.com/plex-sidekiq-servers-list/sidekiqIPs.txt)
+1. Click **Firewall**
+2. Click **Aliases**
+3. Click **Add**
+4. Under **Name** put **Plex**
+5. Under **Description** add your description
+6. Under **Type** select **Host(s)**
+7. Under **IP or FQDN** add the ip address listed in [current working ip address](https://s3-eu-west-1.amazonaws.com/plex-sidekiq-servers-list/sidekiqIPs.txt)
+8. Click **Save**
+9. Click **Apply changes**
+
+Alias for Cloudflare
+1. Click **Firewall**
+2. Click **Aliases**
+3. Click **Add**
+4. Under **Name** put **Cloudflare**
+5. Under **Description** add your description
+6. Under **Type** select **Network(s)**
+7. Under **Network or FQDN** add the IPv4 networks from [Cloudflare IP Range](https://www.cloudflare.com/ips/)
+8. Click **Save**
+9. Click **Apply changes**
+
+Repeat the steps for family devices and another for a nas. Next are some rules to allow Trusted_Devices and Family_Devices to be able to reach out to NAS_Services.
+
+Rule to allow Trusted_Devices to NAS_Services
+1. Click on **Firewall**
+2. Click on **Rules**
+3. Click **LAN**
+4. Click **Added up arrow**
+5. For **Action** select **Pass**
+6. For **Protocol** select **Any**
+7. For **Sources** select **Address or Alias** then next field type **Trusted_Devices**
+8. For **Destination** select **Address or Alias** then next field type **NAS_Services**
+9. For **Description** add a description of the rule action.
+10. Click **Save**
+11. Click **Apply changes**
+12. Click the **Copy** symbol on the new rule we created.
+13. For **Interface** select **OPT2**
+14. Click **Save**
+15. Click **Apply Changes**
+
+Rule to Allow Family_Devices to NAS_Services
+Click on **Firewall**
+2. Click on **Rules**
+3. Click **OPT2**
+4. Click **Added up arrow**
+5. For **Action** select **Pass**
+6. For **Protocol** select **Any**
+7. For **Sources** select **Address or Alias** then next field type **Family_Devices**
+8. For **Destination** select **Address or Alias** then next field type **NAS_Services**
+9. For **Description** add a description of the rule action.
+10. Click **Save**
+11. Click **Apply changes**
+
+## Conditional Port Forwarding
+
+we will use Conditional Port Forwarding to allow traffic from specified source that is calling to our public IP address to pass through the firewall on a specified port and forward that traffic to a specified destination. We will setup up 2 rules to allow Plex Media Services and Cloudflare.
+
+Rule to allow Plex to NAS_Services
+1. Click **Firewall**
+2. Click **NAT**
+3. Click **Add**
+4. Under **Protocol** select **TCP**
+5. Click **Show Advanced**
+6. **Source** select **Address or Alias**
+7. Type **Plex**
+8. **Source** select **Any**
+9. **Destination** select **WAN Address**
+10. **Destination port range** select **Other**
+11. **From port** add the port that you setup for your Plex Server on the NAS
+12. **To port** will be the same number
+13. **Redirect target IP** select **Address or Alias**
+14. for **Type** type **NAS_Services**
+15. **Redirect target port** select **Other**
+16. **Port** put the port that you setup for your Plex Server on the NAS
+17. **Description** add description
+18. Click **Save**
+19. Click **Apply changes**
+
+Rule to Allow Cloudflare to Nginx Proxy Manager
+. Click **Firewall**
+2. Click **NAT**
+3. Click **Add**
+4. Under **Protocol** select **TCP**
+5. Click **Show Advanced**
+6. **Source** select **Address or Alias**
+7. Type **Cloudflare**
+8. **Source** select **Any**
+9. **Destination** select **WAN Address**
+10. **Destination port range** select **HTTPS**
+11. **Custom** select **HTTPS**
+**Redirect target IP** select **Address or Alias**
+12. for **Type** type **Nginx_Server**
+13. **Redirect target port** select **HTTPS**
+14. **Port** put the port that you setup for your Plex Server on the NAS
+15. **Description** add description
+16. Click **Save**
+17. Click **Apply changes**
