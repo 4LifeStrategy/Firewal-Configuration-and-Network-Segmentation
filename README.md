@@ -197,3 +197,24 @@ Rule to block connection from OPT2 To LAN
 4. **Source** set to **OTP2 net**
 5. **Destination** set to **LAN Net**
 6. Check on **Log packets that are handled by this rule**
+
+**Static IP Address & Aliasing**
+
+Assigning static ip addresses for devices on the network would allow maintaining firewalls rules that involves specific devices. Allies allows up to create groups of static ip address to be referenced by a desired naming schema. You will need to find the mac address of each device that you want to assign a static ip address. Usually found in the network settings of said device.
+
+1. Click **Status**
+2. Click **DHCP Leases**
+3. Locate the mac address of the desired device on the list of devices. To the right of it under the **Action** column, click the plus icon that says **Add static mapping** when the mouse is hovered over the button.
+4. In **IP Address** delete the 4th octet with any number between 2-99.
+5. In **Hostname** add the desired name for the device
+6. Click **Save**
+7. Click **Apply changes**<br />*You may need to restart or unplug and replug the device so it can call to the DHCP server for its now assigned ip address.*
+
+Repeat the action each device you want to assign an ip address to a device. For this demonstration we have already assigned ip address to some mobile devices, laptop, nas, and tablet. Next we are going to create some aliases to refer to some of devices when creating firewall rules.
+
+1. Click **Firewall**
+2. Click **Aliases**
+3. Click **Add**
+4. Under **Name** put **Trusted_Devices**
+5. Under **Description** add your description
+6. Under **IP or FQDN** add the static ip of your personal devices like laptop and mobile devices and add a description for each ip address appropriately.<br /><img src="https://github.com/4LifeStrategy/Firewal-Configuration-and-Network-Segmentation/blob/8bba55d16df7edc5ccbc817ab4516e20f86eff22/Trusted%20Devices.png" width="500">
