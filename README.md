@@ -196,7 +196,7 @@ Rule to block connection from OPT2 To LAN
 5. **Destination** set to **LAN Net**
 6. Check on **Log packets that are handled by this rule**
 
-## tatic IP Address & Aliasing
+## Static IP Address & Aliasing
 
 Assigning static ip addresses for devices on the network would allow maintaining firewalls rules that involves specific devices. Allies allows up to create groups of static ip address to be referenced by a desired naming schema. You will need to find the mac address of each device that you want to assign a static ip address. Usually found in the network settings of said device.
 
