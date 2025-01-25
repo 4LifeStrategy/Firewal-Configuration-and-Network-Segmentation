@@ -302,7 +302,7 @@ Rule to allow Plex to NAS_Services
 19. Click **Apply changes**
 
 Rule to Allow Cloudflare to Nginx Proxy Manager
-. Click **Firewall**
+1. Click **Firewall**
 2. Click **NAT**
 3. Click **Add**
 4. Under **Protocol** select **TCP**
